@@ -38,10 +38,10 @@ public class TerrainGen : MonoBehaviour
     {
         mesh = new Mesh();
         mesh.name = "Procedural Terrain";
-        meshFilter = new MeshFilter();
+        meshFilter = GetComponent<MeshFilter>();
         meshFilter.mesh = mesh;
 
-        meshRenderer = new MeshRenderer();
+        meshRenderer = GetComponent<MeshRenderer>();
         Material mat = new Material(Shader.Find("Particles/Standard Unlit"));
         meshRenderer.material = mat;
 
@@ -96,7 +96,7 @@ public class TerrainGen : MonoBehaviour
 
                 tris[currentTrianglePoint + 3] = currentVertexPoint + 1;
                 tris[currentTrianglePoint + 4] = currentVertexPoint + Width + 1;
-                tris[currentTrianglePoint + 5] = currentVertexPoint + 2;
+                tris[currentTrianglePoint + 5] = currentVertexPoint + Width + 2;
 
                 currentVertexPoint++;
                 currentTrianglePoint += 6;
@@ -104,7 +104,7 @@ public class TerrainGen : MonoBehaviour
             currentVertexPoint++;
 
         }
-            uvs = new Vector2[vertices.Length];
+        uvs = new Vector2[vertices.Length];
 
         colors = new Color[vertices.Length];
             i = 0;
