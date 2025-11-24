@@ -6,9 +6,10 @@ using UnityEngine.Serialization;
 
 public class TerrainGen : MonoBehaviour
 {
-    [Header("Grid Size")]
-    [SerializeField] int Width = 50;
-    [SerializeField] int Length = 50;
+    [Header("Grid Size")] 
+    public int Width = 50;
+    public int Length = 50;
+    
 
     
     [Header("Base Noise Configuration")]
@@ -45,8 +46,8 @@ public class TerrainGen : MonoBehaviour
     NavMeshSurface navMeshSurface;
     MeshCollider meshCollider;
 
-    float minHeight = 0;
-    float maxHeight = 0;
+    public float minHeight = 0;
+    public float maxHeight = 0;
 
     void GenerateTerrain()
     {
