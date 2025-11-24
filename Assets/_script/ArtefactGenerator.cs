@@ -1,4 +1,6 @@
-﻿namespace _script
+﻿using ScriplableObject;
+
+namespace _script
 {
     using UnityEngine;
 using UnityEngine.AI;
@@ -16,8 +18,7 @@ public class ArtefactGenerator : MonoBehaviour
     [SerializeField] Transform playerStartPoint; // The position used for path validation
     [SerializeField] TerrainGen terrainGenScript; // Reference to calculate min/max height
 
-    [Header("Artefact Prefabs (6 Types)")]
-    public GameObject[] artefactPrefabs = new GameObject[6];
+    [Header("Artefact Prefabs (6 Types)")] public Artefact[] artefactPrefabs;
 
     // Pathfinder Visualization Settings (Part 2b)
     [Header("Path Visualization")]
@@ -40,42 +41,35 @@ public class ArtefactGenerator : MonoBehaviour
             return;
         }
 
-        // Loop through all 6 artefact types
+        // Loop through all artefacts
         for (int i = 0; i < artefactPrefabs.Length; i++)
         {
             GenerateArtefactType(artefactPrefabs[i]);
         }
     }
+    
 
-    // --- CORE LOGIC: Placement and Validation ---
-
-    private void GenerateArtefactType(GameObject prefab)
+    private void GenerateArtefactType(Artefact artefact)
     {
         int placedCount = 0;
         int attempts = 0;
-        string artefactName = prefab.name;
 
         while (placedCount < objectsPerType && attempts < maxPlacementAttempts)
         {
             attempts++;
 
-            // 1. Get a random position on the map
             Vector3 potentialPos = GetRandomPositionOnMap(); 
             
-            // 2. Snap position to terrain and get its properties (Height, Slope)
+            //Snap position to terrain and get its properties (Height, Slope)
             if (TryGetTerrainProperties(potentialPos, out Vector3 snappedPos, out float normalizedHeight, out float slopeAngle))
             {
-                // 3. CHECK PLACEMENT RULES (Part 2a)
-                if (CheckPlacementRules(artefactName, normalizedHeight, slopeAngle))
+                if (CheckPlacementRules(artefact, normalizedHeight, slopeAngle))
                 {
-                    // 4. NAVMESH ACCESSIBILITY CHECK (Part 2b)
                     if (IsAccessible(playerStartPoint.position, snappedPos, out NavMeshPath path))
                     {
-                        // SUCCESS: Place the object
-                        Instantiate(prefab, snappedPos, Quaternion.identity, transform);
+                        Instantiate(artefact.prefab, snappedPos, Quaternion.identity, transform);
                         placedCount++;
                         
-                        // 5. VISUALIZATION
                         if (isPathVisualizationEnabled)
                         {
                             VisualizePath(path);
@@ -84,14 +78,12 @@ public class ArtefactGenerator : MonoBehaviour
                 }
             }
         }
-        Debug.Log($"Successfully placed {placedCount} instances of {artefactName}.");
+        Debug.Log($"Successfully placed {placedCount} instances of {artefact.name}.");
     }
 
-    // --- HELPER 1: Random Position Generation ---
 
     private Vector3 GetRandomPositionOnMap()
     {
-        // Generates a random coordinate within the terrain bounds (e.g., 0 to 50)
         float randX = Random.Range(0f, terrainGenScript.Width);
         float randZ = Random.Range(0f, terrainGenScript.Length);
         
@@ -99,34 +91,30 @@ public class ArtefactGenerator : MonoBehaviour
         return new Vector3(randX, 50f, randZ);
     }
     
-    // --- HELPER 2: Check Terrain Rules (Crucial for Part 2a) ---
-    // NOTE: This uses the rules planned in the previous response.
-    private bool CheckPlacementRules(string name, float normalizedHeight, float slopeAngle)
+    private bool CheckPlacementRules(Artefact artefact, float normalizedHeight, float slopeAngle)
     {
-        // Use your planned rules (A1-A6) here. Normalized height is 0 (min) to 1 (max).
-        switch (name)
+        // if the value is more than 0(is set) + condition
+        if (artefact.minSpawnHeight >= 0 && normalizedHeight < artefact.minSpawnHeight)
         {
-            case "Health Potion": // A1: Mid-level plains (Grass)
-                return normalizedHeight > 0.35f && normalizedHeight < 0.55f;
-            
-            case "Ancient Coin Stack": // A2: Low-lying shore/sand
-                return normalizedHeight > 0.28f && normalizedHeight < 0.31f;
-
-            case "Treasure Chest": // A3: Flat, high-altitude (Mountain Plateau)
-                return normalizedHeight > 0.75f && slopeAngle < 10f; 
-
-            case "Poison Trap": // A4: Steep slopes
-                return slopeAngle > 35f;
-
-            case "Magic Pick-up": // A5: Highest peaks (Snow)
-                return normalizedHeight > 0.9f;
-
-            case "Weapon (Sword)": // A6: Any non-submerged land (Above deep water)
-                return normalizedHeight > 0.2f;
-
-            default:
-                return false;
+            return false;
         }
+
+        if (artefact.maxSpawnHeight >= 0 && normalizedHeight > artefact.maxSpawnHeight)
+        {
+            return false;
+        }
+
+        if (artefact.minSlopeAngle >= 0 && slopeAngle < artefact.minSlopeAngle)
+        {
+            return false;
+        }
+        if (artefact.maxSlopeAngle >= 0f && slopeAngle > artefact.maxSlopeAngle)
+        {
+            return false;
+        }
+
+        return true;
+        
     }
     
     // --- HELPER 3: Get Terrain Properties (Height & Slope) ---

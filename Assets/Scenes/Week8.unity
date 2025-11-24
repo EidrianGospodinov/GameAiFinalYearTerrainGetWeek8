@@ -157,7 +157,7 @@ MonoBehaviour:
   playerStartPoint: {fileID: 1026951144}
   terrainGenScript: {fileID: 1626511460}
   artefactPrefabs:
-  - {fileID: 5523363530953366563, guid: 4f2ae24e53cff9c4bbbd18b4be162e86, type: 3}
+  - {fileID: 11400000, guid: 69b5d066a313d4e47a0e72cc5df89a46, type: 2}
   pathLineRendererPrefab: {fileID: 0}
   isPathVisualizationEnabled: 0
 --- !u!4 &1019734748
