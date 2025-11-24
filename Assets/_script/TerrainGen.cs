@@ -1,30 +1,35 @@
 using System;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public class TerrainGen : MonoBehaviour
 {
+    [Header("Grid Size")]
     [SerializeField] int Width = 50;
     [SerializeField] int Length = 50;
 
-    [SerializeField] float perlinFrequencyX = 0.1f;
-    [SerializeField] float perlinFrequencyZ = 0.1f;
-    [SerializeField] float perlinNoiseStrength = 7f;
-
     
-
+    [Header("Base Noise Configuration")]
+    [FormerlySerializedAs("perlinFrequency(X/Z)")][SerializeField] float scale = 0.1f;
+    [FormerlySerializedAs("perlinNoiseStrength")][SerializeField] float heightMultiplier = 7f;
 
     [SerializeField] TerrainStyle terrainStyle;
+    
+    
+    //Mesh data
     Vector3[] vertices;
     int[] tris;
     Vector2[] uvs;
     Color[] colors;
 
+    //gradient data
     Gradient TerrainGradient;
     Gradient BlackToWhiteGradient;
     Gradient WhiteToBlackGradient;
 
+    //components reference
     Mesh mesh;
     MeshFilter meshFilter;
     MeshRenderer meshRenderer;
@@ -33,7 +38,6 @@ public class TerrainGen : MonoBehaviour
 
     float minHeight = 0;
     float maxHeight = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         mesh = new Mesh();
@@ -55,6 +59,11 @@ public class TerrainGen : MonoBehaviour
         CreateTerrain();
     }
 
+    private float CalculateHeight(int x, int z)
+    {
+        return Mathf.PerlinNoise(x * scale, z * scale) * heightMultiplier;
+    }
+
     private void GenerateMeshData()
     {
         vertices = new Vector3[(Width + 1) * (Length + 1)];
@@ -65,8 +74,8 @@ public class TerrainGen : MonoBehaviour
         {
             for (int x = 0; x <= Width; x++)
             {
-                float y = Mathf.PerlinNoise(x * perlinFrequencyX, z * perlinFrequencyZ) * perlinNoiseStrength;
-
+                float y = CalculateHeight(x, z);
+                
                 vertices[i] = new Vector3(x, y, z);
 
                 if (y > maxHeight)

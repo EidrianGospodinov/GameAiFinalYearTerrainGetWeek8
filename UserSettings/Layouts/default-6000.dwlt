@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1904
     height: 1021
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Scene
   m_RootView: {fileID: 8}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 2110
+  controlID: 58
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 2176
+  controlID: 56
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -231,7 +231,7 @@ MonoBehaviour:
     height: 36
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
-  m_LastLoadedLayoutName: CustomLayout
+  m_LastLoadedLayoutName: 
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 2093
+  controlID: 57
   draggingID: 0
 --- !u!114 &12
 MonoBehaviour:
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 2094
+  controlID: 49
   draggingID: 0
 --- !u!114 &13
 MonoBehaviour:
@@ -413,7 +413,7 @@ MonoBehaviour:
       y: 21
       width: 1092
       height: 525
-    m_Scale: {x: 0.48611107, y: 0.4861111}
+    m_Scale: {x: 0.4861111, y: 0.4861111}
     m_Translation: {x: 546, y: 262.5}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -980,7 +980,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.000043231707, y: 0.9997012, z: -0.0018086152, w: 0.024299264}
     speed: 2
-    m_Value: {x: 0.00004323179, y: 0.9997031, z: -0.0018086187, w: 0.02429931}
+    m_Value: {x: 0.00004323171, y: 0.99970126, z: -0.0018086153, w: 0.024299266}
   m_Size:
     m_Target: 11.250879
     speed: 2
@@ -1040,8 +1040,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 493
-    y: 659
+    x: 486
+    y: 24
     width: 967
     height: 367
   m_SerializedDataModeController:
@@ -1066,7 +1066,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/_script
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1076,16 +1076,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/_script
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\edgos\Dev\GameAiFinalYearTerrainGetWeek8
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 6e5e0000
-    m_LastClickedID: 24174
-    m_ExpandedIDs: 000000006e5e000000ca9a3b
+    m_SelectedIDs: a4560000
+    m_LastClickedID: 22180
+    m_ExpandedIDs: 0000000046560000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1114,7 +1114,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006e5e000000ca9a3b
+    m_ExpandedIDs: 0000000046560000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1142,7 +1142,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1194,8 +1194,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1462
-    y: 87
+    x: 1455
+    y: 24
     width: 449
     height: 939
   m_SerializedDataModeController:
@@ -1216,7 +1216,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 22
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -1244,8 +1244,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Hierarchy\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 8
-    y: 87
+    x: 0
+    y: 24
     width: 359
     height: 546
   m_SerializedDataModeController:
@@ -1262,9 +1262,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 00d1ffff
-      m_LastClickedID: -12032
-      m_ExpandedIDs: ba8effffd28effff9a97ffff689dffff20a5ffff64abffff4caeffff00d1ffff5cddffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 2afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1311,8 +1311,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 368
-    y: 87
+    x: 361
+    y: 24
     width: 1092
     height: 546
   m_SerializedDataModeController:
@@ -1785,9 +1785,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 32.630474, y: 4.6917977, z: 15.2282715}
+    m_Target: {x: 39.304485, y: 23.878206, z: 26.485464}
     speed: 2
-    m_Value: {x: 32.630474, y: 4.6917977, z: 15.2282715}
+    m_Value: {x: 39.304485, y: 23.878206, z: 26.485464}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1833,9 +1833,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.005470817, y: 0.9810032, z: -0.027966212, w: 0.19191734}
+    m_Target: {x: 0.31910086, y: -0.64115685, z: 0.33379188, w: 0.61293507}
     speed: 2
-    m_Value: {x: 0.005512728, y: 0.98070854, z: -0.027957812, w: 0.19338751}
+    m_Value: {x: -0.31910086, y: 0.64115685, z: -0.3337919, w: -0.6129351}
   m_Size:
     m_Target: 0.8660254
     speed: 2
@@ -1895,8 +1895,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 8
-    y: 659
+    x: 0
+    y: 24
     width: 484
     height: 367
   m_SerializedDataModeController:
@@ -1943,7 +1943,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
