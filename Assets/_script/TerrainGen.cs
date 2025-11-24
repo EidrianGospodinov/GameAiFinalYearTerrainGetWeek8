@@ -12,10 +12,19 @@ public class TerrainGen : MonoBehaviour
 
     
     [Header("Base Noise Configuration")]
-    [FormerlySerializedAs("perlinFrequency(X/Z)")][SerializeField] float scale = 0.1f;
-    [FormerlySerializedAs("perlinNoiseStrength")][SerializeField] float heightMultiplier = 7f;
+    [FormerlySerializedAs("perlinFrequency(X/Z)")][SerializeField] float scale = 3f;
+    [FormerlySerializedAs("perlinNoiseStrength")][SerializeField] float heightMultiplier = 8f;
+
+    [Header("Fractal Noise (Octave) Settings")]
+    [SerializeField] int octaves = 5;        // How many layers of noise to combine
+    [SerializeField] float persistence = 0.35f; // Controls amplitude decay (how fast detail fades)
+    [SerializeField] float lacunarity = 2.0f;  // Controls frequency increase (how much detail is added)
+    Vector2 offset;          // Allows moving the noise field
+
 
     [SerializeField] TerrainStyle terrainStyle;
+    [SerializeField] private bool generateOldTerrain = false;
+    
     
     
     //Mesh data
@@ -38,7 +47,8 @@ public class TerrainGen : MonoBehaviour
 
     float minHeight = 0;
     float maxHeight = 0;
-    void Start()
+
+    void GenerateTerrain()
     {
         mesh = new Mesh();
         mesh.name = "Procedural Terrain";
@@ -54,12 +64,50 @@ public class TerrainGen : MonoBehaviour
         SetTerrainGradient();
         BlackToWhiteGradientCode();
         WhiteToBlackGradientCode();
+        
+        offset = new Vector2(UnityEngine.Random.Range(-10000f, 10000f), UnityEngine.Random.Range(-10000f, 10000f));
 
         GenerateMeshData();
         CreateTerrain();
     }
+    void Start()
+    {
+       GenerateTerrain();
+    }
 
     private float CalculateHeight(int x, int z)
+    {
+        float amplitude = 1;
+        float frequncy = 1;
+        float noiseHeight = 0;
+        float totalAmplitude = 0;
+
+        float normalizedX = (float)x / Width;
+        float normalizedZ = (float)z / Length;
+        for (int i = 0; i < octaves; i++)
+        {
+            float sampleX = normalizedX *scale * frequncy + offset.x;
+            float sampleZ = normalizedZ* scale * frequncy + offset.y;
+
+            float perlinValue = Mathf.PerlinNoise(sampleX, sampleZ) * 2 - 1;
+
+            noiseHeight += perlinValue * amplitude;
+
+            totalAmplitude += amplitude;
+
+            amplitude *= persistence;//decreases the amplitude
+            frequncy *= lacunarity;//increases the frequency
+        }
+
+        if (totalAmplitude > 0)
+        {
+            noiseHeight /= totalAmplitude;
+        }
+
+        return noiseHeight * heightMultiplier;
+    }
+
+    float InitialCalculateHeight(int x, int z)
     {
         return Mathf.PerlinNoise(x * scale, z * scale) * heightMultiplier;
     }
@@ -74,7 +122,16 @@ public class TerrainGen : MonoBehaviour
         {
             for (int x = 0; x <= Width; x++)
             {
-                float y = CalculateHeight(x, z);
+                float y;
+                if (generateOldTerrain)
+                {
+                    scale = 0.1f;
+                    y = InitialCalculateHeight(x, z);
+                }
+                else
+                {
+                    y = CalculateHeight(x, z);
+                }
                 
                 vertices[i] = new Vector3(x, y, z);
 

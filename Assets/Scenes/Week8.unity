@@ -512,10 +512,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Width: 50
   Length: 50
-  perlinFrequencyX: 0.1
-  perlinFrequencyZ: 0.1
-  perlinNoiseStrength: 7
+  scale: 3
+  heightMultiplier: 8
+  octaves: 5
+  persistence: 0.35
+  lacunarity: 2
   terrainStyle: 0
+  generateOldTerrain: 0
 --- !u!1 &1734720554
 GameObject:
   m_ObjectHideFlags: 0
