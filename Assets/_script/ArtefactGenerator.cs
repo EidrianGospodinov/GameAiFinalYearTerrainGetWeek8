@@ -64,7 +64,7 @@ public class ArtefactGenerator : MonoBehaviour
                 {
                     if (IsAccessible(playerStartPoint.position, snappedPos, out NavMeshPath path))
                     {
-                        var artefactInstance = Instantiate(artefact.prefab, snappedPos, Quaternion.identity, transform);
+                        var artefactInstance = Instantiate(artefact.prefab, snappedPos, artefact.prefab.transform.rotation, transform);
                         artefactInstance.transform.parent = gameObject.transform;
                         placedCount++;
                         

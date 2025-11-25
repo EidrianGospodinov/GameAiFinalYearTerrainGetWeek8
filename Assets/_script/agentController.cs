@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class agentController : MonoBehaviour
 {
     NavMeshAgent agent;
+    [SerializeField] private Transform targetPosition;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -14,6 +15,14 @@ public class agentController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             ManualMoveToPoint();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            if (targetPosition != null)
+            {
+                MoveToTarget(targetPosition.position);
+            }
         }
     }
 

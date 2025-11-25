@@ -158,6 +158,10 @@ MonoBehaviour:
   artefactPrefabs:
   - {fileID: 11400000, guid: 69b5d066a313d4e47a0e72cc5df89a46, type: 2}
   - {fileID: 11400000, guid: 2b5e92104d074d942bc37c1fcc98d1a6, type: 2}
+  - {fileID: 11400000, guid: f9c5e19432ddbbf499349a923c712a60, type: 2}
+  - {fileID: 11400000, guid: 3ac92019074c2c14e90496eb6088512c, type: 2}
+  - {fileID: 11400000, guid: 27464997e351190489ab186d9ed62402, type: 2}
+  - {fileID: 11400000, guid: 3a482c5436710bd439ed75f83695f0e2, type: 2}
   pathLineRendererPrefab: {fileID: 7867530697847078643, guid: 88de6b34c69a0834693d3d620b0003ea,
     type: 3}
   isPathVisualizationEnabled: 1
@@ -301,6 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb5ae56c227d27418d6382dfa9032a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetPosition: {fileID: 0}
 --- !u!4 &1026951144
 Transform:
   m_ObjectHideFlags: 0

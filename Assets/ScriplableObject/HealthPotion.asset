@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb11a11a80e0d7941912d96540e56af2, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  artefactPrefab: {fileID: 5523363530953366563, guid: 4f2ae24e53cff9c4bbbd18b4be162e86,
-    type: 3}
+  prefab: {fileID: 5026541447367235291, guid: 25a2198feda15374f95449c0bcfc5fe2, type: 3}
   name: Health Potion
+  spawnCount: 3
   minSpawnHeight: 0.35
   maxSpawnHeight: 0.55
-  minSlopAngle: -1
+  minSlopeAngle: -1
+  maxSlopeAngle: -1
