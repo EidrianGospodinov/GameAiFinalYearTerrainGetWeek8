@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848dbb69c9e846bf81566c6f900f2c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsPerType: 3
   maxPlacementAttempts: 100
   raycastYOffset: 5
   terrainLayer:
@@ -158,6 +157,7 @@ MonoBehaviour:
   terrainGenScript: {fileID: 1626511460}
   artefactPrefabs:
   - {fileID: 11400000, guid: 69b5d066a313d4e47a0e72cc5df89a46, type: 2}
+  - {fileID: 11400000, guid: 2b5e92104d074d942bc37c1fcc98d1a6, type: 2}
   pathLineRendererPrefab: {fileID: 0}
   isPathVisualizationEnabled: 0
 --- !u!4 &1019734748

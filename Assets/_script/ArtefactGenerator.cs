@@ -9,23 +9,20 @@ using System.Collections.Generic;
 public class ArtefactGenerator : MonoBehaviour
 {
     [Header("Generation Settings")]
-    [SerializeField] int objectsPerType = 3;
     [SerializeField] float maxPlacementAttempts = 100;
-    [SerializeField] float raycastYOffset = 5f; // Offset for raycasting down to terrain
-    [SerializeField] LayerMask terrainLayer; // Assign the layer your terrain mesh is on
+    [SerializeField] float raycastYOffset = 5f; 
+    [SerializeField] LayerMask terrainLayer; 
 
     [Header("References")]
-    [SerializeField] Transform playerStartPoint; // The position used for path validation
-    [SerializeField] TerrainGen terrainGenScript; // Reference to calculate min/max height
+    [SerializeField] Transform playerStartPoint; 
+    [SerializeField] TerrainGen terrainGenScript; 
 
-    [Header("Artefact Prefabs (6 Types)")] public Artefact[] artefactPrefabs;
+    [Header("Artefact Prefabs")] public Artefact[] artefactPrefabs;
 
-    // Pathfinder Visualization Settings (Part 2b)
     [Header("Path Visualization")]
     [SerializeField] GameObject pathLineRendererPrefab; 
-    [SerializeField] bool isPathVisualizationEnabled = true; // Toggle option
+    [SerializeField] bool isPathVisualizationEnabled = true; 
 
-    // --- START: Main Entry Point ---
 
     void Start()
     {
@@ -54,7 +51,7 @@ public class ArtefactGenerator : MonoBehaviour
         int placedCount = 0;
         int attempts = 0;
 
-        while (placedCount < objectsPerType && attempts < maxPlacementAttempts)
+        while (placedCount < artefact.spawnCount && attempts < maxPlacementAttempts)
         {
             attempts++;
 
@@ -117,7 +114,6 @@ public class ArtefactGenerator : MonoBehaviour
         
     }
     
-    // --- HELPER 3: Get Terrain Properties (Height & Slope) ---
 
     private bool TryGetTerrainProperties(Vector3 checkPos, out Vector3 snappedPos, out float normalizedHeight, out float slopeAngle)
     {
@@ -145,7 +141,6 @@ public class ArtefactGenerator : MonoBehaviour
         return false;
     }
 
-    // --- HELPER 4: NavMesh Accessibility Check (Crucial for Part 2b) ---
 
     private bool IsAccessible(Vector3 start, Vector3 end, out NavMeshPath path)
     {
@@ -162,7 +157,6 @@ public class ArtefactGenerator : MonoBehaviour
         return path.status == NavMeshPathStatus.PathComplete; 
     }
     
-    // --- HELPER 5: Path Visualization (Crucial for Part 2b) ---
 
     private void VisualizePath(NavMeshPath path)
     {

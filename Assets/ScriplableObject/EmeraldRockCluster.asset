@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb11a11a80e0d7941912d96540e56af2, type: 3}
+  m_Name: EmeraldRockCluster
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7886324015623399097, guid: d165a8104623ef140a027dd3c4a25f40, type: 3}
+  name: Emerald Rock
+  spawnCount: 5
+  minSpawnHeight: 0.55
+  maxSpawnHeight: 0.88
+  minSlopeAngle: 20
+  maxSlopeAngle: 45
