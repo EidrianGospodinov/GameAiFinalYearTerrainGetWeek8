@@ -64,7 +64,8 @@ public class ArtefactGenerator : MonoBehaviour
                 {
                     if (IsAccessible(playerStartPoint.position, snappedPos, out NavMeshPath path))
                     {
-                        Instantiate(artefact.prefab, snappedPos, Quaternion.identity, transform);
+                        var artefactInstance = Instantiate(artefact.prefab, snappedPos, Quaternion.identity, transform);
+                        artefactInstance.transform.parent = gameObject.transform;
                         placedCount++;
                         
                         if (isPathVisualizationEnabled)
@@ -168,11 +169,10 @@ public class ArtefactGenerator : MonoBehaviour
 
         if (line != null)
         {
-            // Set the path points (corners) to the LineRenderer
+            
             line.positionCount = path.corners.Length;
             line.SetPositions(path.corners);
         }
-        // NOTE: You can add a short timer to destroy the line after a few seconds if desired.
     }
 }
 }
