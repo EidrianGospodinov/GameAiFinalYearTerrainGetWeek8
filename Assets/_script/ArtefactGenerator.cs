@@ -22,6 +22,7 @@ public class ArtefactGenerator : MonoBehaviour
     [Header("Path Visualization")]
     [SerializeField] GameObject pathLineRendererPrefab; 
     [SerializeField] bool isPathVisualizationEnabled = true; 
+    private List < GameObject> artefactList = new List<GameObject>();
 
 
     void Start()
@@ -66,6 +67,7 @@ public class ArtefactGenerator : MonoBehaviour
                     {
                         var artefactInstance = Instantiate(artefact.prefab, snappedPos, artefact.prefab.transform.rotation, transform);
                         artefactInstance.transform.parent = gameObject.transform;
+                        artefactList.Add(artefactInstance);
                         placedCount++;
                         
                         if (isPathVisualizationEnabled)
@@ -91,7 +93,7 @@ public class ArtefactGenerator : MonoBehaviour
     
     private bool CheckPlacementRules(Artefact artefact, float normalizedHeight, float slopeAngle)
     {
-        // if the value is more than 0(is set) + condition
+        // if the value is more than 0(value is set) + condition
         if (artefact.minSpawnHeight >= 0 && normalizedHeight < artefact.minSpawnHeight)
         {
             return false;
@@ -127,13 +129,13 @@ public class ArtefactGenerator : MonoBehaviour
         {
             snappedPos = hit.point;
             
-            // Calculate Normalized Height (required for the rules)
+            // Calculate Normalized Height
             float currentHeight = snappedPos.y;
             float min = terrainGenScript.minHeight;
             float max = terrainGenScript.maxHeight;
             normalizedHeight = Mathf.InverseLerp(min, max, currentHeight);
             
-            // Calculate Slope Angle (required for the rules)
+            // Calculate Slope Angle
             slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
             
             return true;
@@ -147,14 +149,11 @@ public class ArtefactGenerator : MonoBehaviour
     {
         path = new NavMeshPath();
         
-        // 1. Warp start/end points onto the NavMesh if they aren't already exactly on it
         NavMesh.SamplePosition(start, out NavMeshHit startHit, 5f, NavMesh.AllAreas);
         NavMesh.SamplePosition(end, out NavMeshHit endHit, 5f, NavMesh.AllAreas);
 
-        // 2. Calculate the path between the player's start and the potential object location
         NavMesh.CalculatePath(startHit.position, endHit.position, NavMesh.AllAreas, path);
 
-        // 3. Return true only if the path is complete (i.e., not blocked by water/cliffs)
         return path.status == NavMeshPathStatus.PathComplete; 
     }
     
@@ -173,6 +172,11 @@ public class ArtefactGenerator : MonoBehaviour
             line.positionCount = path.corners.Length;
             line.SetPositions(path.corners);
         }
+    }
+
+    public void ClearArtefactList()
+    {
+        artefactList.Clear();
     }
 }
 }
