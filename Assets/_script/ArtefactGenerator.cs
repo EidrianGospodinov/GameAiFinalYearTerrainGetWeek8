@@ -22,7 +22,7 @@ public class ArtefactGenerator : MonoBehaviour
     [Header("Path Visualization")]
     [SerializeField] GameObject pathLineRendererPrefab; 
     [SerializeField] bool isPathVisualizationEnabled = true; 
-    private List < GameObject> artefactList = new List<GameObject>();
+    private List <GameObject> artefactList = new List<GameObject>();
 
 
     void Start()
@@ -65,7 +65,15 @@ public class ArtefactGenerator : MonoBehaviour
                 {
                     if (IsAccessible(playerStartPoint.position, snappedPos, out NavMeshPath path))
                     {
-                        var artefactInstance = Instantiate(artefact.prefab, snappedPos, artefact.prefab.transform.rotation, transform);
+                        Quaternion spawnRotation = artefact.prefab.transform.rotation;
+                        if (artefact.applyRandomYRotation)
+                        {
+                            //apply random rotation on the y axis
+                            float randomYRotation = UnityEngine.Random.Range(0f, 360f);
+                            spawnRotation *= Quaternion.Euler(0f, randomYRotation, 0f);
+                        }
+                        
+                        var artefactInstance = Instantiate(artefact.prefab, snappedPos, spawnRotation, transform);
                         artefactInstance.transform.parent = gameObject.transform;
                         artefactList.Add(artefactInstance);
                         placedCount++;

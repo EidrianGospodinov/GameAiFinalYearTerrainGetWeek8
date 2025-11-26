@@ -19,3 +19,4 @@ MonoBehaviour:
   maxSpawnHeight: 0.8
   minSlopeAngle: -1
   maxSlopeAngle: 45
+  applyRandomYRotation: 1

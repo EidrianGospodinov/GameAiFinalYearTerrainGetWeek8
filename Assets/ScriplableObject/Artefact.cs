@@ -18,5 +18,6 @@ namespace ScriplableObject
         public float maxSpawnHeight = -1f;
         public float minSlopeAngle = -1f;
         public float maxSlopeAngle = -1f;
+        public bool applyRandomYRotation = false;
     }
 }
